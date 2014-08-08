@@ -42,15 +42,28 @@
       },
       "runtime" : {
          "requires" : {
+            "JSON::RPC::Dispatch" : "0",
+            "Router::Simple" : "0",
             "perl" : "5.008001"
          }
       },
       "test" : {
          "requires" : {
+            "Plack::Test" : "0",
             "Test::More" : "0.98"
          }
       }
    },
    "release_status" : "unstable",
+   "resources" : {
+      "bugtracker" : {
+         "web" : "ssh://git@github.com/nqounet/p5-json-rpc-lite/issues"
+      },
+      "homepage" : "ssh://git@github.com/nqounet/p5-json-rpc-lite",
+      "repository" : {
+         "url" : "ssh://git@github.com/nqounet/p5-json-rpc-lite.git",
+         "web" : "ssh://git@github.com/nqounet/p5-json-rpc-lite"
+      }
+   },
    "version" : "0.01"
 }
