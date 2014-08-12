@@ -65,8 +65,5 @@
          "web" : "https://github.com/nqounet/p5-json-rpc-lite"
       }
    },
-   "version" : "0.01",
-   "x_contributors" : [
-      "nqounet <nobu@nishimiyahara.net>"
-   ]
+   "version" : "0.01"
 }
