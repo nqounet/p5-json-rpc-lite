@@ -1,7 +1,7 @@
 {
    "abstract" : "Simple Syntax JSON RPC 2.0 Server Implementation",
    "author" : [
-      "nqounet <nobu@nishimiyahara.net>"
+      "nqounet <mail@nqou.net>"
    ],
    "dynamic_config" : 0,
    "generated_by" : "Minilla/v2.1.1, CPAN::Meta::Converter version 2.142060",
@@ -57,13 +57,16 @@
    "release_status" : "unstable",
    "resources" : {
       "bugtracker" : {
-         "web" : "ssh://git@github.com/nqounet/p5-json-rpc-lite/issues"
+         "web" : "https://github.com/nqounet/p5-json-rpc-lite/issues"
       },
-      "homepage" : "ssh://git@github.com/nqounet/p5-json-rpc-lite",
+      "homepage" : "https://github.com/nqounet/p5-json-rpc-lite",
       "repository" : {
-         "url" : "ssh://git@github.com/nqounet/p5-json-rpc-lite.git",
-         "web" : "ssh://git@github.com/nqounet/p5-json-rpc-lite"
+         "url" : "https://github.com/nqounet/p5-json-rpc-lite.git",
+         "web" : "https://github.com/nqounet/p5-json-rpc-lite"
       }
    },
-   "version" : "0.01"
+   "version" : "0.01",
+   "x_contributors" : [
+      "nqounet <nobu@nishimiyahara.net>"
+   ]
 }

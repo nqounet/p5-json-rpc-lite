@@ -5,22 +5,40 @@ use warnings;
 
 our $VERSION = "0.01";
 
-use Router::Simple;
-use JSON::RPC::Dispatch::Lite;
+use JSON::RPC::Spec;
+use Plack::Request;
 
 sub import {
     my $pkg    = caller(0);
-    my $router = Router::Simple->new;
+    my $rpc    = JSON::RPC::Spec->new;
     my $method = sub ($$) {
         my ($pattern, $code) = @_;
-        $router->connect($pattern, +{code => $code}, +{});
+        $rpc->register($pattern, $code);
     };
     no strict 'refs';
     *{"${pkg}::method"}      = $method;
     *{"${pkg}::as_psgi_app"} = sub {
-        my $dispatch = JSON::RPC::Dispatch::Lite->new(router => $router);
         return sub {
-            $dispatch->handle_psgi($_[0]);
+            my $req    = Plack::Request->new(@_);
+            my $body   = $rpc->parse($req->content);
+            my $header = ['Content-Type' => 'application/json'];
+            if (length $body == 0) {
+                return [204, [], []];
+            }
+            my $status = 200;
+            if (exists $body->{error}) {
+                my $code = $body->{error}{code};
+                if ($code == -32600) {
+                    $status = 400;
+                }
+                elsif ($code == -32601) {
+                    $status = 404;
+                }
+                else {
+                    $status = 500;
+                }
+            }
+            return [$status, $header, [$body]];
         };
     };
 }
@@ -39,14 +57,13 @@ JSON::RPC::Lite - Simple Syntax JSON RPC 2.0 Server Implementation
     # app.psgi
     use JSON::RPC::Lite;
     method 'echo' => sub {
-        my ($param) = @_;
-        return $param;
+        return $_[0];
     };
     as_psgi_app;
 
 =head1 DESCRIPTION
 
-JSON::RPC::Lite is lite version of JSON::RPC.
+JSON::RPC::Lite is sinatra-ish style JSON RPC 2.0 Server Implementation.
 
 =head1 LICENSE
 
@@ -57,7 +74,6 @@ it under the same terms as Perl itself.
 
 =head1 AUTHOR
 
-nqounet E<lt>nobu@nishimiyahara.netE<gt>
+nqounet E<lt>mail@nqou.netE<gt>
 
 =cut
-

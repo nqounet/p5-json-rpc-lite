@@ -7,14 +7,13 @@ JSON::RPC::Lite - Simple Syntax JSON RPC 2.0 Server Implementation
     # app.psgi
     use JSON::RPC::Lite;
     method 'echo' => sub {
-        my ($param) = @_;
-        return $param;
+        return $_[0];
     };
     as_psgi_app;
 
 # DESCRIPTION
 
-JSON::RPC::Lite is lite version of JSON::RPC.
+JSON::RPC::Lite is sinatra-ish style JSON RPC 2.0 Server Implementation.
 
 # LICENSE
 
@@ -25,4 +24,4 @@ it under the same terms as Perl itself.
 
 # AUTHOR
 
-nqounet <nobu@nishimiyahara.net>
+nqounet <mail@nqou.net>
