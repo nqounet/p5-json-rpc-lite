@@ -5,8 +5,6 @@ use HTTP::Request::Common;
 
 use JSON::RPC::Lite;
 
-use DDP {deparse => 1};
-
 my $method = method('echo', sub { $_[0] });
 is ref $method, 'JSON::RPC::Spec', 'instance of `JSON::RPC::Spec`';
 
