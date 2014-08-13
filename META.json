@@ -64,6 +64,6 @@
          "web" : "https://github.com/nqounet/p5-json-rpc-lite"
       }
    },
-   "version" : "0.01",
+   "version" : "0.02",
    "x_authority" : "cpan:NQOUNET"
 }
