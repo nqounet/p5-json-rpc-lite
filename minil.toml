@@ -1,4 +1,5 @@
 name = "JSON-RPC-Lite"
-# badges = ["travis"]
-module_maker="ModuleBuildTiny"
+badges = ["travis"]
+authority="cpan:NQOUNET"
 
+module_maker="ModuleBuildTiny"

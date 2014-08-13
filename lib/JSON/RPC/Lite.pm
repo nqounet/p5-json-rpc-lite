@@ -12,8 +12,7 @@ sub import {
     my $pkg    = caller(0);
     my $rpc    = JSON::RPC::Spec->new;
     my $method = sub ($$) {
-        my ($pattern, $code) = @_;
-        $rpc->register($pattern, $code);
+        $rpc->register(@_);
     };
     no strict 'refs';
     *{"${pkg}::method"}      = $method;
@@ -22,23 +21,10 @@ sub import {
             my $req    = Plack::Request->new(@_);
             my $body   = $rpc->parse($req->content);
             my $header = ['Content-Type' => 'application/json'];
-            if (length $body == 0) {
-                return [204, [], []];
+            if (length $body) {
+                return [200, $header, [$body]];
             }
-            my $status = 200;
-            if (exists $body->{error}) {
-                my $code = $body->{error}{code};
-                if ($code == -32600) {
-                    $status = 400;
-                }
-                elsif ($code == -32601) {
-                    $status = 404;
-                }
-                else {
-                    $status = 500;
-                }
-            }
-            return [$status, $header, [$body]];
+            return [204, [], []];
         };
     };
 }
@@ -59,11 +45,30 @@ JSON::RPC::Lite - Simple Syntax JSON RPC 2.0 Server Implementation
     method 'echo' => sub {
         return $_[0];
     };
+    method 'empty' => sub {''};
     as_psgi_app;
+
+    # run
+    $ plackup app.psgi
 
 =head1 DESCRIPTION
 
 JSON::RPC::Lite is sinatra-ish style JSON RPC 2.0 Server Implementation.
+
+=head1 FUNCTIONS
+
+=head2 method
+
+    method 'method_name1' => sub { ... };
+    method 'method_name2' => sub { ... };
+
+register method
+
+=head2 as_psgi_app
+
+    as_psgi_app;
+
+run as PSGI app.
 
 =head1 LICENSE
 

@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/nqounet/p5-json-rpc-lite.png?branch=master)](https://travis-ci.org/nqounet/p5-json-rpc-lite)
 # NAME
 
 JSON::RPC::Lite - Simple Syntax JSON RPC 2.0 Server Implementation
@@ -9,11 +10,30 @@ JSON::RPC::Lite - Simple Syntax JSON RPC 2.0 Server Implementation
     method 'echo' => sub {
         return $_[0];
     };
+    method 'empty' => sub {''};
     as_psgi_app;
+
+    # run
+    $ plackup app.psgi
 
 # DESCRIPTION
 
 JSON::RPC::Lite is sinatra-ish style JSON RPC 2.0 Server Implementation.
+
+# FUNCTIONS
+
+## method
+
+    method 'method_name1' => sub { ... };
+    method 'method_name2' => sub { ... };
+
+register method
+
+## as\_psgi\_app
+
+    as_psgi_app;
+
+run as PSGI app.
 
 # LICENSE
 

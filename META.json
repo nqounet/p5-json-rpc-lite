@@ -42,14 +42,13 @@
       },
       "runtime" : {
          "requires" : {
-            "JSON::RPC::Dispatch" : "0",
-            "Router::Simple" : "0",
+            "JSON::RPC::Spec" : "0",
+            "Plack" : "0",
             "perl" : "5.008001"
          }
       },
       "test" : {
          "requires" : {
-            "Plack::Test" : "0",
             "Test::More" : "0.98"
          }
       }
@@ -65,5 +64,6 @@
          "web" : "https://github.com/nqounet/p5-json-rpc-lite"
       }
    },
-   "version" : "0.01"
+   "version" : "0.01",
+   "x_authority" : "cpan:NQOUNET"
 }
